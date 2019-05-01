@@ -12,25 +12,24 @@
         var $body = $('body');
         $body.html('');
         $('<button class="newTweets">New Tweets</button>').appendTo($body);
-        var $tweet = $('<div></div>');
 
         var update = function() {
           startIndex = streams.home.length - 1;
-
+          $('<div id="refresh"></div>').appendTo($body);
           while(startIndex >= 0){
             var tweet = streams.home[startIndex];
-            $tweet = $('<div></div>');
+            var $tweet = $('<div></div>');
 
             $tweet.text('@' + tweet.user + ': ' + tweet.message + ' ' + tweet.created_at);
 
-            $tweet.appendTo($body);
+            $tweet.appendTo("#refresh");
             startIndex -= 1;
           }
-
         };
+
         update();
         $(".newTweets").on("click", function() {
-          $tweet.remove();
+          $('#refresh').remove();
           update();
         });
 
