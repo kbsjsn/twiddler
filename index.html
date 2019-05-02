@@ -18,8 +18,7 @@
           $('<div id="refresh"></div>').appendTo($body);
           while(startIndex >= 0){
             var tweet = streams.home[startIndex];
-            var $tweet = $('<div></div>');
-
+            var $tweet = $('<div + class=' + tweet.user + '></div>');
             $tweet.text('@' + tweet.user + ': ' + tweet.message + ' ' + tweet.created_at);
 
             $tweet.appendTo("#refresh");
@@ -33,7 +32,17 @@
           update();
         });
 
-
+        for(var user in streams.users){
+          $("div." + user).on("click", function() {
+            $('#refresh').remove();
+            $('<div id="refresh"></div>').appendTo($body);
+            for(var tweet of streams.users[user]) {
+              var $tweet = $('<div></div>');
+              $tweet.text('@' + user + ': ' + tweet.message);
+              $tweet.appendTo("#refresh");
+            }
+          });
+        }
 
 
       });
